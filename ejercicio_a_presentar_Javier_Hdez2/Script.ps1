@@ -21,11 +21,34 @@
 
 $reader=(New-Object System.Xml.XmlNodeReader $xaml) 
 $Form=[Windows.Markup.XamlReader]::Load( $reader )
-
+$check1= $Form.FindName('Check1')
 $txtText1 = $Form.FindName('Text1')
+$txtText2 = $Form.FindName('Text2')
 
-$btnBoton1 = $Form.FindName('Boton2')
-$btnBoton1.Add_Click({$txtText1.Text = "Aceptar"})
+$btnBoton3 = $Form.FindName('Boton3')
+$btnBoton3.Add_Click({
+<#	$txtText1.Text = "Aceptar"} #>
+[System.Windows.Forms.MessageBox]::Show("Estas son las condiciones donde la parte contratantes de la primera parte será considerada la parte contratante de la primera parte  ","Condiciones de IT");
+})
+$btnBoton1 = $Form.FindName('Boton1')
+$btnBoton1.Add_Click({
+$Form.Close()
+	})
+
+$btnBoton2 = $Form.FindName('Boton2')
+$btnBoton2.Add_Click({
+
+	$cad1 = "SI "
+	if ($check1.Checked -eq $false) {
+		$cad1 = "NO " 
+	   }
+
+	$cad1 = $cad1 + "Queda vd registrado dentro del sistema señor " + $txtText1.Text + " " +  $txtText2.Text
+	
+	
+	[System.Windows.Forms.MessageBox]::Show($cad1,"Condiciones de IT");
+$Form.Close()
+})
 
 function Check_Dir_and_Create ([string] $pathdir) {
 	write-host ("$pathdir")
