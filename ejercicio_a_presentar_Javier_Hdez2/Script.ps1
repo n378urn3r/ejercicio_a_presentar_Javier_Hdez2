@@ -39,7 +39,7 @@ $btnBoton2 = $Form.FindName('Boton2')
 $btnBoton2.Add_Click({
 
 	$cad1 = "SI "
-	if ($check1.Checked -eq $false) {
+	if ($check1.IsChecked -eq $false) {
 		$cad1 = "NO " 
 	   }
 
@@ -60,10 +60,11 @@ function Check_Dir_and_Create ([string] $pathdir) {
 }
 
 function Del_dir_and_create ([string] $pathdir2) {
-	Check_Dir_and_Create ("$pathdir2")
+	
 	write-host ("Deletting space on $pathdir2")
 	Set-Location $pathdir2
-	Remove-Item -Path $pathdir2
+    Remove-Item $pathdir2 -Recurse -Confirm:$false
+	Check_Dir_and_Create ("$pathdir2")
 }
 
 Del_dir_and_create ('c:\temp')
@@ -76,8 +77,8 @@ Check_Dir_and_Create('C:\archivos\Administración\Otras_Plataformas')
 Check_Dir_and_Create('C:\archivos\Personales')
 
 
-Write-Host ("(Pulse una tecla para continuar")
-[string] $continuar = Read-Host
+<#Write-Host ("(Pulse una tecla para continuar")
+[string] $continuar = Read-Host #>
 $Form.ShowDialog()
 
 
