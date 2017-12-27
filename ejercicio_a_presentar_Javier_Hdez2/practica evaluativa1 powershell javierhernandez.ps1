@@ -27,8 +27,10 @@ $txtText2 = $Form.FindName('Text2')
 
 $btnBoton3 = $Form.FindName('Boton3')
 $btnBoton3.Add_Click({
-<#	$txtText1.Text = "Aceptar"} #>
-[System.Windows.Forms.MessageBox]::Show("Estas son las condiciones donde la parte contratantes de la primera parte será considerada la parte contratante de la primera parte  ","Condiciones de IT");
+[System.Windows.Forms.MessageBox]::Show("Estas son las condiciones donde la parte contratantes de la primera parte será considerada la parte contratante de la primera parte  ","Condiciones de IT")
+
+
+
 })
 $btnBoton1 = $Form.FindName('Boton1')
 $btnBoton1.Add_Click({
@@ -47,6 +49,8 @@ $btnBoton2.Add_Click({
 	
 	
 	[System.Windows.Forms.MessageBox]::Show($cad1,"Condiciones de IT");
+     Write-Host ("Fin de programa (Pulse una tecla para continuar)")
+     [string] $continuar = Read-Host 
 $Form.Close()
 })
 
@@ -63,7 +67,8 @@ function Del_dir_and_create ([string] $pathdir2) {
 	
 	write-host ("Deletting space on $pathdir2")
 	Set-Location $pathdir2
-    Remove-Item $pathdir2 -Recurse -Confirm:$false
+    
+    Remove-Item "$pathdir2\*" -Recurse -force -Confirm:$false
 	Check_Dir_and_Create ("$pathdir2")
 }
 
@@ -77,8 +82,7 @@ Check_Dir_and_Create('C:\archivos\Administración\Otras_Plataformas')
 Check_Dir_and_Create('C:\archivos\Personales')
 
 
-<#Write-Host ("(Pulse una tecla para continuar")
-[string] $continuar = Read-Host #>
+
 $Form.ShowDialog()
 
 
